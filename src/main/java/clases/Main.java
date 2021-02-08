@@ -29,6 +29,9 @@ public class Main {
 			case 3:
 				baja(catalogo);
 				break;
+			case 4:
+				busqueda(catalogo);
+				break;
 			default:
 				break;
 			}
@@ -129,13 +132,18 @@ public class Main {
 //    	      System.out.println("TÃ­tulo: " + Libro.getTitulo());
 
 		// principito:2323:novela:marina:100
+
+		int i = 0;
 		for (Libro l : catalogo) {
 //			System.out.println("Titulo: " + l.getTitulo());
 //			System.out.println("isbn: " + l.getIsbn());
 //			System.out.println("Genero: " + l.getGenero());
 //			System.out.println("Autor: " + l.getAutor());
 //			System.out.println("Paginas: " + l.getPaginas());
+			System.out.println("Libro en posición: " + i);
 			System.out.println(l);
+			i++;
+
 		}
 
 	}
@@ -144,7 +152,22 @@ public class Main {
 		Scanner teclado = new Scanner(System.in);
 		System.out.println("Â¿Cual libro quieres borrar?");
 		int libroBorrar = teclado.nextInt();
-			catalogo.remove(libroBorrar);	
-		
+		catalogo.remove(libroBorrar);
+
 	}
+
+	private static void busqueda(ArrayList<Libro> catalogo) {
+		Scanner teclado = new Scanner(System.in);
+		System.out.print("Introduzca el ISBN del libro para buscarlo: ");
+		String isbn_deseado = teclado.next();
+
+		for (Libro l : catalogo) {
+			if (l.getIsbn().equalsIgnoreCase(isbn_deseado)) {
+				System.out.println("El libro está disponible, el título es: " + l.getTitulo());
+			} else {
+				System.out.println("El libro no está disponible.");
+			}
+		}
+	}
+
 }
