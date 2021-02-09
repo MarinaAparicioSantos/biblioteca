@@ -4,6 +4,8 @@
 package clases;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.InputMismatchException;
 import java.util.List;
 import java.util.Scanner;
@@ -50,7 +52,7 @@ public class Main {
 			System.out.println("5. Ordenacion de Libros");
 			System.out.println("Introduce la opcion:");
 
-			opcion = leerOpcion(3);
+			opcion = leerOpcion(4);
 
 		} while (opcion <= 0);
 
@@ -140,7 +142,7 @@ public class Main {
 //			System.out.println("Genero: " + l.getGenero());
 //			System.out.println("Autor: " + l.getAutor());
 //			System.out.println("Paginas: " + l.getPaginas());
-			System.out.println("Libro en posición: " + i);
+			System.out.println("Libro en posiciï¿½n: " + i);
 			System.out.println(l);
 			i++;
 
@@ -157,17 +159,52 @@ public class Main {
 	}
 
 	private static void busqueda(ArrayList<Libro> catalogo) {
+
 		Scanner teclado = new Scanner(System.in);
 		System.out.print("Introduzca el ISBN del libro para buscarlo: ");
 		String isbn_deseado = teclado.next();
 
 		for (Libro l : catalogo) {
-			if (l.getIsbn().equalsIgnoreCase(isbn_deseado)) {
-				System.out.println("El libro está disponible, el título es: " + l.getTitulo());
+
+			
+			
+//			l.getIsbn().indexOf(isbn_deseado);
+			
+			int isbn = catalogo.indexOf(isbn_deseado);
+			
+			if (isbn == - 1) {
+				System.out.println("El libro estï¿½ disponible, el tï¿½tulo es: " + l.getTitulo());
 			} else {
-				System.out.println("El libro no está disponible.");
+				System.out.println("El libro no estï¿½ disponible.");
 			}
 		}
+		
+
+		
 	}
 
+	private static void ordenar(ArrayList<Libro> catalogo) {
+
+		Scanner teclado = new Scanner(System.in);
+		System.out.println("Â¿Deseas ordenar por tÃ­tulo o por NÃºmero de PÃ¡ginas?\n");
+		String tipo = teclado.next();
+
+		if (tipo.equals("titulo")) {
+			
+			//Collections.sort();
+
+		} else if (tipo.equals("paginas")) {
+
+		}
+
+	}
+	
+//	public int compareTo(Libro l) {
+//	
+//		l.getTitulo();
+//        return l.getTitulo().compareTo(l.getTitulo());
+//        
+//	}
 }
+
+//collection.sort(catalogo)
