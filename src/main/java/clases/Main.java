@@ -142,7 +142,7 @@ public class Main {
 //			System.out.println("Genero: " + l.getGenero());
 //			System.out.println("Autor: " + l.getAutor());
 //			System.out.println("Paginas: " + l.getPaginas());
-			System.out.println("Libro en posici�n: " + i);
+			System.out.println("Libro en posicion: " + i);
 			System.out.println(l);
 			i++;
 
@@ -173,9 +173,15 @@ public class Main {
 			int isbn = catalogo.indexOf(isbn_deseado);
 			
 			if (isbn == - 1) {
-				System.out.println("El libro est� disponible, el t�tulo es: " + l.getTitulo());
+				System.out.println("El libro esta disponible.");
+				System.out.println("El titulo es: " + l.getTitulo());
+				System.out.println("El isbn es: " + l.getIsbn());
+				System.out.println("El genero es: " + l.getGenero());
+				System.out.println("El autor es: " + l.getAutor());
+				System.out.println("El numero de paginas es: " + l.getPaginas());
+				
 			} else {
-				System.out.println("El libro no est� disponible.");
+				System.out.println("El libro no esta en la lista.");
 			}
 		}
 		
@@ -208,3 +214,5 @@ public class Main {
 }
 
 //collection.sort(catalogo)
+
+//https://www.adictosaltrabajo.com/2007/07/10/listas/
