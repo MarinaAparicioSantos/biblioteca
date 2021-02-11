@@ -3,6 +3,10 @@
  */
 package clases;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -12,10 +16,12 @@ import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws IOException {
 
 		ArrayList<Libro> catalogo = new ArrayList<Libro>();
 
+		//salvarFichero();
+		
 		while (true) {
 			int opcion = menu();
 			switch (opcion) {
@@ -186,7 +192,7 @@ public class Main {
 		}
 		
 
-		
+	
 	}
 
 	private static void ordenar(ArrayList<Libro> catalogo) {
@@ -211,8 +217,39 @@ public class Main {
 //        return l.getTitulo().compareTo(l.getTitulo());
 //        
 //	}
+	
+	
+	
+	private static void salvarFichero(ArrayList<Libro> catalogo) throws IOException {
+		
+		Scanner teclado = new Scanner(System.in);
+		
+		System.out.print("Nombre del fichero que deseas crear: ");
+		
+		String nombreFichero = teclado.next();
+		
+		
+		 FileWriter fichero = new FileWriter(nombreFichero);
+		 
+		 int i = 0;
+		 for(Libro l : catalogo) {
+			 fichero.write("Libro numero "+i);
+			 fichero.write("Libro numero "+i);
+			 fichero.write("Libro numero "+i);
+			 fichero.write("Libro numero "+i);
+			 fichero.write("Libro numero "+i);
+			 fichero.write("Libro numero "+i);
+			 i++;
+		 }
+
+		 fichero.close();
+	}
 }
 
 //collection.sort(catalogo)
 
-//https://www.adictosaltrabajo.com/2007/07/10/listas/
+//https://www.adictosaltrabajo.com/2007/07/10/lista
+
+
+
+
