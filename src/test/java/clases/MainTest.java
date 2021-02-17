@@ -51,7 +51,7 @@ class MainTest {
 	 */
 	void test01() {
 		//Scanner lectorSalida = new Scanner(salida);
-		Main.main(null);
+		//Main.main(null);
 		assertEquals("Hola Mundo", outputStreamCaptor.toString().trim()/*lectorSalida.nextLine()*/);
 		//lectorSalida.close();
 	}

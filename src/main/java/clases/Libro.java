@@ -1,6 +1,6 @@
 package clases;
 
-public class Libro {
+public class Libro implements Comparable<Libro>{
 	
 	private String titulo;
 	private String isbn;
@@ -98,10 +98,34 @@ public class Libro {
 		retorno = retorno + "isbn: " + isbn+ "\n";
 		retorno = retorno + "Genero: " + genero+ "\n";
 		retorno = retorno + "Autor: " + autor+ "\n";
-		retorno = retorno + "Paginas: " + paginas;
+		retorno = retorno + "Paginas: " + paginas+"\n";
 		return retorno;
 	}
 	
 	
+	public boolean equals(Object o) {
 
+        Libro l = (Libro) o;
+        boolean b = false;
+
+        if (this == o) {
+            b = true;
+
+        } else {
+            if (this.isbn.equalsIgnoreCase(l.isbn)) {
+                b = true;
+            }
+        }
+        return b;
+    }
+	
+	
+	
+
+	@Override
+    public int compareTo(Libro libroOrdenar) {
+        return titulo.compareTo(libroOrdenar.getTitulo());
+	}
+	
+	
 }

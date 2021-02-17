@@ -3,24 +3,19 @@
  */
 package clases;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.InputMismatchException;
-import java.util.List;
 import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException{
 
 		ArrayList<Libro> catalogo = new ArrayList<Libro>();
 
-		//salvarFichero();
 		
 		while (true) {
 			int opcion = menu();
@@ -28,17 +23,27 @@ public class Main {
 			case 1:
 				// TODO Alta de Libro
 				// titulo:isbn:genero:autor:paginas
-				alta(catalogo);
+				alta(catalogo); //HECHO
 				break;
 			case 2:
 				// TODO Lista de Libros
-				listaLibros(catalogo);
+				listaLibros(catalogo); //HECHO
 				break;
 			case 3:
-				baja(catalogo);
+				baja(catalogo); //HECHO
 				break;
 			case 4:
-				busqueda(catalogo);
+				busqueda(catalogo); //HECHO
+				break;
+			case 5:
+				ordenar(catalogo);
+				break;
+			case 6:
+				salvarFichero(catalogo);
+				break;
+			case 7:
+				break;
+			case 8:
 				break;
 			default:
 				break;
@@ -56,9 +61,12 @@ public class Main {
 			System.out.println("3. Baja de Libros");
 			System.out.println("4. BÃºsqueda de Libros");
 			System.out.println("5. Ordenacion de Libros");
+			System.out.println("6. Salvar fichero");
+			System.out.println("7. Cargar fichero");
+			System.out.println("8. Limpiar catálogo.");
 			System.out.println("Introduce la opcion:");
 
-			opcion = leerOpcion(4);
+			opcion = leerOpcion(5);
 
 		} while (opcion <= 0);
 
@@ -164,51 +172,83 @@ public class Main {
 
 	}
 
+//	private static void busqueda(ArrayList<Libro> catalogo) {
+//
+//		Scanner teclado = new Scanner(System.in);
+//		System.out.print("Introduzca el ISBN del libro para buscarlo: ");
+//		String isbn_deseado = teclado.next();
+//
+//		for (Libro l : catalogo) {
+//
+//			
+//			
+////			l.getIsbn().indexOf(isbn_deseado);
+//			
+//			int isbn = catalogo.indexOf(isbn_deseado);
+//			
+//			if (isbn == - 1) {
+//				System.out.println("El libro esta disponible.");
+//				System.out.println("El titulo es: " + l.getTitulo());
+//				System.out.println("El isbn es: " + l.getIsbn());
+//				System.out.println("El genero es: " + l.getGenero());
+//				System.out.println("El autor es: " + l.getAutor());
+//				System.out.println("El numero de paginas es: " + l.getPaginas());
+//				
+//			} else {
+//				System.out.println("El libro no esta en la lista.");
+//			}
+//		}
+//		
+//
+//	
+//	}
+	
+	
 	private static void busqueda(ArrayList<Libro> catalogo) {
 
-		Scanner teclado = new Scanner(System.in);
-		System.out.print("Introduzca el ISBN del libro para buscarlo: ");
-		String isbn_deseado = teclado.next();
+        //Pregunta al usuario el ISBN
+        String isbn_deseado = "hola";
+        Scanner teclado = new Scanner(System.in);
+        System.out.print("-Búsqueda rápida-, introduzca el ISBN: ");
+        isbn_deseado = teclado.nextLine();
 
-		for (Libro l : catalogo) {
+        //Usa el método .indexOf de List para ver si está el Libro con el ISBN introducido
+        Libro l = new Libro();
+        l.setIsbn(isbn_deseado);
 
-			
-			
-//			l.getIsbn().indexOf(isbn_deseado);
-			
-			int isbn = catalogo.indexOf(isbn_deseado);
-			
-			if (isbn == - 1) {
-				System.out.println("El libro esta disponible.");
-				System.out.println("El titulo es: " + l.getTitulo());
-				System.out.println("El isbn es: " + l.getIsbn());
-				System.out.println("El genero es: " + l.getGenero());
-				System.out.println("El autor es: " + l.getAutor());
-				System.out.println("El numero de paginas es: " + l.getPaginas());
-				
-			} else {
-				System.out.println("El libro no esta en la lista.");
-			}
-		}
-		
+        int posicion = 0;
+        posicion = catalogo.indexOf(l);
 
-	
-	}
+        //Si está muestra todos los datos del libro
+        //Si no está muestra un mensaje diciendo que el libro no está en la lista
+        if (posicion < 0) {
+            System.out.println("El libro no existe");
+        }
+        else {
+        //    String name = catalogo.get(posicion);
+            System.out.println("El libro es: \n" + (catalogo.get(posicion)));
+        }
+    }
 
 	private static void ordenar(ArrayList<Libro> catalogo) {
 
 		Scanner teclado = new Scanner(System.in);
-		System.out.println("Â¿Deseas ordenar por tÃ­tulo o por NÃºmero de PÃ¡ginas?\n");
+		System.out.println("Â¿Deseas ordenar por titulo o por numero de paginas?\n");
 		String tipo = teclado.next();
 
 		if (tipo.equals("titulo")) {
 			
-			//Collections.sort();
+			Collections.sort(catalogo);
 
-		} else if (tipo.equals("paginas")) {
+		    for (Libro l : catalogo) {
+		    System.out.println(" ");
+		    System.out.println(l);
+			}
+		}
+		 else if (tipo.equals("paginas")) {
 
 		}
-
+		
 	}
 	
 //	public int compareTo(Libro l) {
@@ -234,22 +274,18 @@ public class Main {
 		 int i = 0;
 		 for(Libro l : catalogo) {
 			 fichero.write("Libro numero "+i);
-			 fichero.write("Libro numero "+i);
-			 fichero.write("Libro numero "+i);
-			 fichero.write("Libro numero "+i);
-			 fichero.write("Libro numero "+i);
-			 fichero.write("Libro numero "+i);
+			 fichero.write(l.getTitulo()+", "+l.getIsbn()+", "+l.getGenero()+
+					 		", "+l.getAutor()+", "+l.getPaginas());
+			 
+//			 fichero.write("El titulo es: " + l.getTitulo());
+//			 fichero.write("El isbn es: " + l.getIsbn());
+//			 fichero.write("El genero es: " + l.getGenero());
+//			 fichero.write("El autor es: " + l.getAutor());
+//			 fichero.write("El numero de paginas es: " + l.getPaginas());
 			 i++;
 		 }
 
 		 fichero.close();
 	}
 }
-
-//collection.sort(catalogo)
-
 //https://www.adictosaltrabajo.com/2007/07/10/lista
-
-
-
-
