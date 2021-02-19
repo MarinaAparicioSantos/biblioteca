@@ -312,7 +312,7 @@ public class Main {
 	
 	private static boolean validador1(String validar) {
 		
-		return validar.matches("[\\w-]+:[0-9]+:NOVELA|POESIA|FICCION:[\\w-]+:[0-9]+");
+		return validar.matches("[\\w-]+:[0-9]+:(NOVELA|POESIA|FICCION):[\\w-]+:[0-9]+");
 	}
 	
 
