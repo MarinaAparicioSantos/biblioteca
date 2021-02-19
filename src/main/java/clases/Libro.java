@@ -1,5 +1,7 @@
 package clases;
 
+import java.util.Comparator;
+
 public class Libro implements Comparable<Libro>{
 	
 	private String titulo;
@@ -120,12 +122,33 @@ public class Libro implements Comparable<Libro>{
     }
 	
 	
-	
 
 	@Override
     public int compareTo(Libro libroOrdenar) {
-        return titulo.compareTo(libroOrdenar.getTitulo());
+        return titulo.compareToIgnoreCase(libroOrdenar.getTitulo());
 	}
 	
+
+//    @Override
+//    public int compareTo(Libr o) {
+//        if (paginas < o.paginas) {
+//            return -1;
+//        }
+//        if (paginas > o.paginas) {
+//            return 1;
+//        }
+//        return 0;
+//    }
 	
-}
+	
+//	class OrderNums implements Comparator<Integer> {
+//	    public int compare(Integer a, Integer b) {
+//	        return b - a;
+//	    }
+//	}	
+	
+		
+//	public int compare(Libro a, Libro b) {
+//          return a.paginas.compareTo(b.paginas);
+//      }
+  }

@@ -3,37 +3,39 @@
  */
 package clases;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
 
-	public static void main(String[] args) throws IOException{
+	public static void main(String[] args) throws IOException {
 
 		ArrayList<Libro> catalogo = new ArrayList<Libro>();
 
-		
 		while (true) {
 			int opcion = menu();
 			switch (opcion) {
 			case 1:
 				// TODO Alta de Libro
 				// titulo:isbn:genero:autor:paginas
-				alta(catalogo); //HECHO
+				alta(catalogo); // HECHO
 				break;
 			case 2:
 				// TODO Lista de Libros
-				listaLibros(catalogo); //HECHO
+				listaLibros(catalogo); // HECHO
 				break;
 			case 3:
-				baja(catalogo); //HECHO
+				baja(catalogo); // HECHO
 				break;
 			case 4:
-				busqueda(catalogo); //HECHO
+				busqueda(catalogo); // HECHO
 				break;
 			case 5:
 				ordenar(catalogo);
@@ -42,8 +44,10 @@ public class Main {
 				salvarFichero(catalogo);
 				break;
 			case 7:
+				cargarFichero(catalogo);
 				break;
 			case 8:
+				limpiarCatalogo(catalogo);
 				break;
 			default:
 				break;
@@ -66,7 +70,7 @@ public class Main {
 			System.out.println("8. Limpiar catálogo.");
 			System.out.println("Introduce la opcion:");
 
-			opcion = leerOpcion(5);
+			opcion = leerOpcion(8);
 
 		} while (opcion <= 0);
 
@@ -81,7 +85,7 @@ public class Main {
 			if (opcion > max)
 				opcion = -1;
 		} catch (InputMismatchException e) {
-			System.out.println("OpciÃ³n incorrecta");
+			System.out.println("Opcion incorrecta");
 		}
 
 		return opcion;
@@ -109,6 +113,7 @@ public class Main {
 			try {
 				datos = leerCadena();
 				if (true)// Supongo de momento que valida siempre
+					validador1(datos);
 					validado = true;
 			} catch (InputMismatchException e) {
 				System.out.println("Datos de entrada no vÃ¡lidos");
@@ -143,9 +148,6 @@ public class Main {
 
 	private static void listaLibros(ArrayList<Libro> catalogo) {
 
-//    	for (int i = 0; i < catalogo.size(); i++) {
-//    	      Libro l = catalogo.get(i);
-//    	      System.out.println("TÃ­tulo: " + Libro.getTitulo());
 
 		// principito:2323:novela:marina:100
 
@@ -172,63 +174,31 @@ public class Main {
 
 	}
 
-//	private static void busqueda(ArrayList<Libro> catalogo) {
-//
-//		Scanner teclado = new Scanner(System.in);
-//		System.out.print("Introduzca el ISBN del libro para buscarlo: ");
-//		String isbn_deseado = teclado.next();
-//
-//		for (Libro l : catalogo) {
-//
-//			
-//			
-////			l.getIsbn().indexOf(isbn_deseado);
-//			
-//			int isbn = catalogo.indexOf(isbn_deseado);
-//			
-//			if (isbn == - 1) {
-//				System.out.println("El libro esta disponible.");
-//				System.out.println("El titulo es: " + l.getTitulo());
-//				System.out.println("El isbn es: " + l.getIsbn());
-//				System.out.println("El genero es: " + l.getGenero());
-//				System.out.println("El autor es: " + l.getAutor());
-//				System.out.println("El numero de paginas es: " + l.getPaginas());
-//				
-//			} else {
-//				System.out.println("El libro no esta en la lista.");
-//			}
-//		}
-//		
-//
-//	
-//	}
-	
-	
+
 	private static void busqueda(ArrayList<Libro> catalogo) {
 
-        //Pregunta al usuario el ISBN
-        String isbn_deseado = "hola";
-        Scanner teclado = new Scanner(System.in);
-        System.out.print("-Búsqueda rápida-, introduzca el ISBN: ");
-        isbn_deseado = teclado.nextLine();
+		// Pregunta al usuario el ISBN
+		String isbn_deseado = "hola";
+		Scanner teclado = new Scanner(System.in);
+		System.out.print("-Búsqueda rápida-, introduzca el ISBN: ");
+		isbn_deseado = teclado.nextLine();
 
-        //Usa el método .indexOf de List para ver si está el Libro con el ISBN introducido
-        Libro l = new Libro();
-        l.setIsbn(isbn_deseado);
 
-        int posicion = 0;
-        posicion = catalogo.indexOf(l);
+		Libro l = new Libro();
+		l.setIsbn(isbn_deseado);
 
-        //Si está muestra todos los datos del libro
-        //Si no está muestra un mensaje diciendo que el libro no está en la lista
-        if (posicion < 0) {
-            System.out.println("El libro no existe");
-        }
-        else {
-        //    String name = catalogo.get(posicion);
-            System.out.println("El libro es: \n" + (catalogo.get(posicion)));
-        }
-    }
+		int posicion = 0;
+		posicion = catalogo.indexOf(l);
+
+		// Si está muestra todos los datos del libro
+		// Si no está muestra un mensaje diciendo que el libro no está en la lista
+		if (posicion < 0) {
+			System.out.println("El libro no existe");
+		} else {
+			// String name = catalogo.get(posicion);
+			System.out.println("El libro es: \n" + (catalogo.get(posicion)));
+		}
+	}
 
 	private static void ordenar(ArrayList<Libro> catalogo) {
 
@@ -237,55 +207,114 @@ public class Main {
 		String tipo = teclado.next();
 
 		if (tipo.equals("titulo")) {
-			
+
 			Collections.sort(catalogo);
 
-		    for (Libro l : catalogo) {
-		    System.out.println(" ");
-		    System.out.println(l);
+			for (Libro l : catalogo) {
+				System.out.println(" ");
+				System.out.println(l);
+			}
+		} else if (tipo.equals("paginas")) {
+
+			Comparator<Libro> comparador = (a, b) -> a.getPaginas().compareTo(b.getPaginas());
+			catalogo.sort(comparador);
+
+			for (Libro l : catalogo) {
+				System.out.println(" ");
+				System.out.println(l);
 			}
 		}
-		 else if (tipo.equals("paginas")) {
-
-		}
-		
 	}
-	
+
 //	public int compareTo(Libro l) {
 //	
 //		l.getTitulo();
 //        return l.getTitulo().compareTo(l.getTitulo());
 //        
 //	}
-	
-	
-	
-	private static void salvarFichero(ArrayList<Libro> catalogo) throws IOException {
-		
-		Scanner teclado = new Scanner(System.in);
-		
-		System.out.print("Nombre del fichero que deseas crear: ");
-		
-		String nombreFichero = teclado.next();
-		
-		
-		 FileWriter fichero = new FileWriter(nombreFichero);
-		 
-		 int i = 0;
-		 for(Libro l : catalogo) {
-			 fichero.write("Libro numero "+i);
-			 fichero.write(l.getTitulo()+", "+l.getIsbn()+", "+l.getGenero()+
-					 		", "+l.getAutor()+", "+l.getPaginas());
-			 
-//			 fichero.write("El titulo es: " + l.getTitulo());
-//			 fichero.write("El isbn es: " + l.getIsbn());
-//			 fichero.write("El genero es: " + l.getGenero());
-//			 fichero.write("El autor es: " + l.getAutor());
-//			 fichero.write("El numero de paginas es: " + l.getPaginas());
-			 i++;
-		 }
 
-		 fichero.close();
+	private static void salvarFichero(ArrayList<Libro> catalogo) throws IOException {
+
+		Scanner teclado = new Scanner(System.in);
+
+		System.out.print("Nombre del fichero que deseas crear: ");
+
+		String nombreFichero = teclado.next();
+
+		FileWriter fichero = new FileWriter(nombreFichero);
+
+		int i = 0;
+		for (Libro l : catalogo) {
+
+			fichero.write(l.getTitulo() + "," + l.getIsbn() + "," + l.getGenero() + "," + l.getAutor() + ","
+					+ l.getPaginas());
+		}
+
+		fichero.close();
 	}
+
+
+	
+	
+	private static void cargarFichero(ArrayList<Libro> catalogo) {
+
+        Libro libro = null;
+
+        try {
+
+            System.out.println("Introduzca el nombre del archivo a leer");
+            Scanner teclado = new Scanner(System.in);
+            String respuesta = teclado.next(); // Archivo blas, cambiar a input del usuario
+
+
+            File myObj = new File(respuesta);//
+            Scanner myReader = new Scanner(myObj);//
+
+            System.out.println("El fichero ha sido cargado.");
+
+            while (myReader.hasNextLine()) {
+
+                // System.out.println(myObj);
+
+                String line = myReader.next();
+                String[] datos = line.split(",");
+
+                String titulo = datos[0];
+                String isbn = datos[1];
+                Genero genero = Genero.getGenero(datos[2]);
+                String autor = datos[3];
+                Integer paginas = Integer.parseInt(datos[4]);
+
+                libro = new Libro(titulo, isbn, genero, autor, paginas);
+                catalogo.add(libro);
+
+                // EL PRIMER LIBRO NO SE IMPRIME --- ARREGLAR
+                while (myReader.hasNextLine()) {
+                    String data = myReader.nextLine();
+                    System.out.println(data);
+                }
+            }
+            myReader.close();
+        } catch (FileNotFoundException e) {
+            System.out.println("Error del programa, vuelva al menú.");
+            e.printStackTrace();
+        }
+    }
+    
+
+	private static void limpiarCatalogo(ArrayList<Libro> catalogo) {
+
+		catalogo.clear();
+
+		System.out.println("Catalogo borrado.");
+
+	}
+	
+	private static boolean validador1(String validar) {
+		
+		return validar.matches("[\\w-]+:[0-9]+:NOVELA|POESIA|FICCION:[\\w-]+:[0-9]+");
+	}
+	
+
+
 }
-//https://www.adictosaltrabajo.com/2007/07/10/lista
