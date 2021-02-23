@@ -216,8 +216,12 @@ public class Main {
 			}
 		} else if (tipo.equals("paginas")) {
 
-			Comparator<Libro> comparador = (a, b) -> a.getPaginas().compareTo(b.getPaginas());
-			catalogo.sort(comparador);
+//			Comparator<Libro> comparador = (a, b) -> a.getPaginas().compareTo(b.getPaginas());
+//			catalogo.sort(comparador);
+			Comparator<Libro> a = new Libro();
+			Collections.sort(catalogo, a);
+			
+			Collections.sort(catalogo, new Libro());
 
 			for (Libro l : catalogo) {
 				System.out.println(" ");
@@ -247,7 +251,7 @@ public class Main {
 		for (Libro l : catalogo) {
 
 			fichero.write(l.getTitulo() + "," + l.getIsbn() + "," + l.getGenero() + "," + l.getAutor() + ","
-					+ l.getPaginas());
+					+ l.getPaginas()+"\n");
 		}
 
 		fichero.close();
@@ -264,8 +268,7 @@ public class Main {
 
             System.out.println("Introduzca el nombre del archivo a leer");
             Scanner teclado = new Scanner(System.in);
-            String respuesta = teclado.next(); // Archivo blas, cambiar a input del usuario
-
+            String respuesta = teclado.next(); 
 
             File myObj = new File(respuesta);//
             Scanner myReader = new Scanner(myObj);//
@@ -274,7 +277,6 @@ public class Main {
 
             while (myReader.hasNextLine()) {
 
-                // System.out.println(myObj);
 
                 String line = myReader.next();
                 String[] datos = line.split(",");
@@ -288,7 +290,6 @@ public class Main {
                 libro = new Libro(titulo, isbn, genero, autor, paginas);
                 catalogo.add(libro);
 
-                // EL PRIMER LIBRO NO SE IMPRIME --- ARREGLAR
                 while (myReader.hasNextLine()) {
                     String data = myReader.nextLine();
                     System.out.println(data);
