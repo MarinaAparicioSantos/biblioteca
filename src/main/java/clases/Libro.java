@@ -94,6 +94,9 @@ public class Libro implements Comparable<Libro>, Comparator<Libro> {
 	}
 
 	@Override
+	/**Metodo toString de la clase Libro que muestra los datos de los libros.
+	 * @return retorno
+	 */
 	public String toString() {
 		String retorno;
 		retorno = "Titulo: " + titulo + "\n";
@@ -104,14 +107,19 @@ public class Libro implements Comparable<Libro>, Comparator<Libro> {
 		return retorno;
 	}
 
+	/**
+	 * @param o
+	 * @return b
+	 */
 	public boolean equals(Object o) {
 
+		//El objeto o se transforma en libro.
 		Libro l = (Libro) o;
+		//Variable booleana falsa.
 		boolean b = false;
-
+		//si el objeto o es igual al libro o, b es verdadero.
 		if (this == o) {
 			b = true;
-
 		} else {
 			if (this.isbn.equalsIgnoreCase(l.isbn)) {
 				b = true;
@@ -122,156 +130,20 @@ public class Libro implements Comparable<Libro>, Comparator<Libro> {
 
 
 	@Override
+	/**Metodo compareTo que compara los titulos de los libros por orden natural.
+	 * @param libroOrdenar
+	 */
     public int compareTo(Libro libroOrdenar) {
         return titulo.compareToIgnoreCase(libroOrdenar.getTitulo());
-		//return libroOrdenar.getTitulo().compareToIgnoreCase(this.titulo); al reves
-		
 	}
 
 	@Override
+	/**Metodo compare que compara las paginas de los libros por orden no natural.
+	 * @param o1
+	 * @param o2
+	 */
 	public int compare(Libro o1, Libro o2) {
 
-		return  new Integer(o1.getPaginas()).compareTo(new Integer(o2.getPaginas()));
-		//return  new Integer(o2.getPaginas()).compareTo(new Integer(o1.getPaginas())); al reves
-		
+		return  new Integer(o1.getPaginas()).compareTo(new Integer(o2.getPaginas()));	
 	}
-	
-
-	// IMPORTANTE
-//	@Override
-//	public int compareTo(Libro l) {
-//		int salida;
-//
-//		if (l.getTitulo().compareToIgnoreCase(this.titulo) == 0) {
-//			if (l.getAutor().compareToIgnoreCase(this.autor) > 0) {
-//				salida = -1;
-//			} else if (l.getAutor().compareToIgnoreCase(this.autor) < 0) {
-//				salida = 1;
-//			} else {
-//				salida = 0;
-//			}
-//		} else if (l.getTitulo().compareToIgnoreCase(this.titulo) > 0) {
-//			salida = -1;
-//		} else {
-//			salida = 1;
-//		}
-//		return salida;
-//	}
-
-	//////////////////////////////////////////////////////
-
-//	@Override
-//	public int compare(Object obj1, Object obj2) {
-//		Persona per1 = (Persona)obj1;
-//		Persona per2 = (Persona)obj2;
-//		
-//		return per1.getNombre().compareTo(per2.getNombre());
-//		
-//	}
-//	/////////////////////
-
-//	@Override
-//	public int compare(Libro per1, Libro per2) {
-//		int rpta = 0;
-//		if (per1.getPaginas() > per2.getPaginas()) {
-//			rpta = 1;
-//		} else if (per1.getPaginas() < per2.getPaginas()) {
-//			rpta = -1;
-//		} else {
-//			rpta = 0;
-//
-//			if (rpta == 0) {
-//				if (per1.getTitulo().compareToIgnoreCase(per2.getTitulo()) > 0) {
-//					rpta = 1;
-//				} else if (per1.getTitulo().compareToIgnoreCase(per2.getTitulo()) < 0) {
-//					rpta = -1;
-//				} else {
-//					rpta = 0;
-//				}
-//			}
-//
-//		}
-//		return rpta;
-//	}
-
-	//////////////////////
-
-	///////////////////////////////////////////////
-
-//    @Override
-//    public int compareTo(Libr o) {
-//        if (paginas < o.paginas) {
-//            return -1;
-//        }
-//        if (paginas > o.paginas) {
-//            return 1;
-//        }
-//        return 0;
-//    }
-
-//	class OrderNums implements Comparator<Integer> {
-//	    public int compare(Integer a, Integer b) {
-//	        return b - a;
-//	    }
-//	}	
-
-//	public int compare(Libro a, Libro b) {
-//          return a.paginas.compareTo(b.paginas);
-//      }
-
 }
-
-//
-//Por filas y columnas
-//public class RecorrerMatrizPorFilasYColumnas {
-//	public static void main(String[] args) {
-//		int[][] matriz = new int[50][100]; // Matriz de números enteros que supondremos llena.
-//						   // 50 filas y 100 columnas.
-//	
-//		for (int i = 0; i < 50; i++)		// El primer índice recorre las filas.
-//			for (int j = 0; j < 100; j++){	// El segundo índice recorre las columnas.
-//				// Procesamos cada elemento de la matriz.
-//				System.out.println(matriz[i][j]);
-//			}
-//	}
-//}
-//Por columnas y filas
-//public class RecorrerMatrizPorColumnasYFilas {
-//	public static void main(String[] args) {
-//		int[][] matriz = new int[50][100]; // Matriz de números enteros que supondremos llena.
-//						   // 50 filas y 100 columnas.
-//	
-//		for (int i = 0; i < 100; i++)		// El primer índice recorre las columnas.
-//			for (int j = 0; j < 50; j++){	// El segundo índice recorre las filas.
-//				// Procesamos cada elemento de la matriz.
-//				System.out.println(matriz[j][i]);	// ¡Índices cambiados de orden!
-//			}
-//	}
-//}
-//Por filas y columnas al revés
-//public class RecorrerMatrizPorFilasYColumnasAlReves {
-//	public static void main(String[] args) {
-//		int[][] matriz = new int[50][100]; // Matriz de números enteros que supondremos llena.
-//						   // 50 filas y 100 columnas.
-//	
-//		for (int i = 49; i > 0; i--)		// El primer índice recorre las filas.
-//			for (int j = 99; j > 0; j--){	// El segundo índice recorre las columnas.
-//				// Procesamos cada elemento de la matriz.
-//				System.out.println(matriz[i][j]);
-//			}
-//	}
-//}
-//O sin cambiar los índices:
-//
-//public class RecorrerMatrizPorFilasYColumnasAlReves2 {
-//	public static void main(String[] args) {
-//		int[][] matriz = new int[50][100]; // Matriz de números enteros que supondremos llena.
-//						   // 50 filas y 100 columnas.
-//	
-//		for (int i = 0; i < 50; i++)		// El primer índice recorre las filas.
-//			for (int j = 0; j < 100; j++){	// El segundo índice recorre las columnas.
-//				// Procesamos cada elemento de la matriz.
-//				System.out.println(matriz[49 - i][99 - j]);
-//			}
-//	}
-//}
